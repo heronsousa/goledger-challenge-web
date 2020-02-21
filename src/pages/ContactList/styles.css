@@ -1,0 +1,9 @@
+ul {
+    min-width: 450px;
+    list-style: none;
+}
+
+ul header {
+    align-self: center;
+    margin-bottom: 10px;
+}

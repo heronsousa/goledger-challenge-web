@@ -1,4 +1,6 @@
 import React from 'react';
+import { Group } from '@material-ui/icons';
+
 import ContactList from './pages/ContactList/index';
 import Menu from './pages/Menu/index';
 
@@ -8,9 +10,13 @@ import './global.css'
 function App() {
     return (
         <div className="app">
-            <aside>
+            {/* <aside>
                 <Menu />
-            </aside>
+            </aside> */}
+            <div className="header">
+                <Group />
+                <strong>Contatos</strong>
+            </div>
             <main>
                 <ContactList />
             </main>

@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
-import  api from '../../services/api'
+import  api from '../../services/api';
+import { Delete, Edit } from '@material-ui/icons';
 
-import './index.css'
+import './styles.css';
+import user_icon from '../../assets/user-icon.svg';
 
 export default function Contact({ contact }) {
 
@@ -30,19 +32,34 @@ export default function Contact({ contact }) {
 
     return (
         <>
-            <li>Nome: {contact.name}</li>
-            <li>Telefone: {contact.phone}</li>
-            <li>Email: {contact.email}</li>
-            <li>Companhia: {contact.company}</li>
-            <li>Idade: {contact.age}</li>
+            <li>
+                <div className="contact">
+                    <img src={user_icon} alt=""/>
 
-            <input 
+                    <div className="contact-info">
+                        <strong>{contact.name}</strong>
+                        <div className="phone">{contact.phone}</div>
+                        <div className="email">{contact.email}</div>
+                    </div>
+                </div>
+                
+                <div className="contact-actions">
+                    <Delete 
+                        fontSize={'small'} 
+                        onClick={() => {deleteContact(contact.name)}}
+                    />
+                    <Edit 
+                        fontSize={'small'} 
+                        onClick={() => {updateContact(contact.name)}}
+                    />
+                </div>
+            </li>
+
+            {/* <input 
                 value={contact.email}
                 onChange={e => setEmail(e.target.value)}
-            />
+            /> */}
 
-            <button onClick={() => {deleteContact(contact.name)}}>Delete</button>
-            <button onClick={() => {updateContact(contact.name)}}>Update</button>
         </>
     );
 }
