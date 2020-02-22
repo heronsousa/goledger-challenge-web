@@ -22,7 +22,7 @@ export default function ContactList() {
     return (
         <ul className="contact-container">
             {contacts.map(contact => (
-                <Contact key={contact['key']} contact={contact} />
+                <Contact key={contact['@key']} contact={contact} />
             ))}
         </ul>
     );
