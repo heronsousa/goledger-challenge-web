@@ -19,6 +19,12 @@ div .contact {
 }
 
 img {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+}
+
+.increaseImg {
     width: 80px;
     height: 80px;
     border-radius: 40px;
@@ -26,6 +32,25 @@ img {
 
 div .contact-info {
     margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+div .contact-info strong {
+    font-size: 16px;
+    color: #333;
+}
+
+div .contact-info .phone, 
+div .contact-info .email,
+div .contact-info .company,
+div .contact-info .age {
+    display: inline-flex;
+    align-items: center;
+
+    margin-top: 5px;
+    font-size: 12px;
+    color: #333
 }
 
 div .contact-actions {
@@ -35,4 +60,9 @@ div .contact-actions {
     justify-self: flex-end;
     margin-top: 5px;
     gap: 5px;
+}
+
+div .contact-actions :hover,
+div .contact :hover {
+    cursor: pointer;
 }
