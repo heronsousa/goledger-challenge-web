@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import  api from '../../services/api';
-import { Delete, Edit, Phone, Email, Business,Today } from '@material-ui/icons';
+import { Delete, Edit, Phone, Email, Business, Today, ExpandMore, ExpandLess } from '@material-ui/icons';
 
 import './styles.css';
 import user_icon from '../../assets/user-icon.svg';
@@ -31,14 +31,10 @@ export default function Contact({ contact }) {
         window.location.reload(false);
     }
 
-    function handleVisibleInfo() {
-        setVisibleInfo(!visibleInfo);
-    }
-
     return (
         <>
             <li>
-                <div className="contact" onClick={handleVisibleInfo}>
+                <div className="contact" onClick={() => {setVisibleInfo(!visibleInfo)}}>
                     <img src={user_icon} alt="UserImage" className={visibleInfo ? "increaseImg": null} />
 
                     <div className="contact-info">
@@ -69,16 +65,31 @@ export default function Contact({ contact }) {
                 </div>
                 
                 <div className="contact-actions">
-                    <Edit 
-                        fontSize={'small'} 
-                        style={{color: '#333'}}
-                        onClick={() => {updateContact(contact.name)}}
-                    />
-                    <Delete 
-                        fontSize={'small'} 
-                        style={{color: '#333'}}
-                        onClick={() => {deleteContact(contact.name)}}
-                    />
+                    { visibleInfo ?
+                        <>
+                            <Edit 
+                                fontSize={'small'} 
+                                style={{color: '#333'}}
+                                onClick={() => {updateContact(contact.name)}}
+                            />
+                            <Delete 
+                                fontSize={'small'} 
+                                style={{color: '#333'}}
+                                onClick={() => {deleteContact(contact.name)}}
+                            />
+                            <ExpandLess 
+                                fontSize={'small'} 
+                                style={{color: '#333'}}
+                                onClick={() => {setVisibleInfo(!visibleInfo)}}
+                            />
+                        </>
+                    : 
+                            <ExpandMore 
+                                fontSize={'small'} 
+                                style={{color: '#333'}}
+                                onClick={() => {setVisibleInfo(!visibleInfo)}}
+                        />
+                    }
                 </div>
             </li>
 

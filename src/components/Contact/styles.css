@@ -54,12 +54,10 @@ div .contact-info .age {
 }
 
 div .contact-actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: inline-flex;
     align-self: flex-start;
     justify-self: flex-end;
     margin-top: 5px;
-    gap: 5px;
 }
 
 div .contact-actions :hover,
