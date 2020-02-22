@@ -38,7 +38,11 @@ const useStyles = makeStyles(theme => ({
 
 export default function Contact({ contact }) {
 
-    const [email, setEmail] = useState('');
+    const [name, setName] = useState(contact.name);
+    const [email, setEmail] = useState(contact.email);
+    const [phone, setPhone] = useState(contact.phone);
+    const [company, setCompany] = useState(contact.company);
+    const [age, setAge] = useState(contact.age);
     const [visibleInfo, setVisibleInfo] = useState(false);
     const [open, setOpen] = React.useState(false);
 
@@ -68,15 +72,20 @@ export default function Contact({ contact }) {
         window.location.reload(false);
     }
 
-    async function updateContact(contact) {
-        // const data = {
-        //     "@assetType": "contact",
-        //     "name": name,
-        //     "email": email
-        // }
+    async function updateContact(e) {
+        e.preventDefault();
 
-        // await api.put('/update', data);
-        // window.location.reload(false);
+        const data = {
+            "@assetType": "contact",
+            "name": name,
+            "email": email,
+            "age": Number(age),
+            "company": company,
+            "phone": phone
+        }
+
+        await api.put('/update', data);
+        window.location.reload(false);
     }
 
     return (
@@ -155,9 +164,9 @@ export default function Contact({ contact }) {
             >
                 <Fade in={open}>
                     <div className={classes.paper}>
-                        <strong>Atualizar contato</strong>
+                        <strong className="form-title">Atualizar contato</strong>
                     
-                        <form className={classes.form}>
+                        <form className={classes.form} onSubmit={updateContact}>
 
                             <div className="input-block">
                                 <label htmlFor="name">Nome</label>
@@ -166,16 +175,19 @@ export default function Contact({ contact }) {
                                     id="name"
                                     required
                                     defaultValue={contact.name}
+                                    onChange={e => setName(e.target.value)}
                                 />
                             </div>                           
 
                             <div className="input-block">
                                 <label htmlFor="phone">Telefone</label>
                                 <input 
-                                    type="number" 
+                                    type="text" 
                                     id="phone"
+                                    required
                                     defaultValue={contact.phone}
-                                    />
+                                    onChange={e => setPhone(e.target.value)}
+                                />
                             </div>       
 
                              <div className="input-block">
@@ -184,7 +196,8 @@ export default function Contact({ contact }) {
                                     type="email" 
                                     id="email"
                                     defaultValue={contact.email}
-                                    />
+                                    onChange={e => setEmail(e.target.value)}
+                                />
                             </div>                                         
 
                             <div className="input-block">
@@ -193,7 +206,8 @@ export default function Contact({ contact }) {
                                     type="text" 
                                     id="company"
                                     defaultValue={contact.company}
-                                    />
+                                    onChange={e => setCompany(e.target.value)}
+                                />
                             </div>                        
 
                             <div className="input-block">
@@ -202,6 +216,7 @@ export default function Contact({ contact }) {
                                     type="number" 
                                     id="age"
                                     defaultValue={contact.age}
+                                    onChange={e => setAge(e.target.value)}
                                 />
                             </div>
 
