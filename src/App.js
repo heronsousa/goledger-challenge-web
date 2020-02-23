@@ -1,5 +1,5 @@
 import React from 'react';
-import { Group } from '@material-ui/icons';
+import { Group, RecentActors } from '@material-ui/icons';
 
 import ContactList from './pages/ContactList/index';
 import Menu from './pages/Menu/index';
@@ -10,15 +10,23 @@ import './global.css'
 function App() {
     return (
         <div className="app">
-            {/* <aside>
-                <Menu />
-            </aside> */}
-            <div className="header">
-                <Group />
-                <strong>Contatos</strong>
-            </div>
+            <aside>
+                <div className="header">
+                    <RecentActors />
+                    <strong>PhoneBook</strong>
+                </div>
+                <div className="content">
+                    <Menu />
+                </div>
+            </aside>
             <main>
-                <ContactList />
+                <div className="header">
+                    <Group />
+                    <strong>Contatos</strong>
+                </div>
+                <div className="content">
+                    <ContactList />
+                </div>
             </main>
         </div>
     );

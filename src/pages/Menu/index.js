@@ -1,14 +1,20 @@
 import React from 'react';
+import { PersonAdd, Group } from '@material-ui/icons';
 
 import './styles.css';
 
 export default function Menu() {
   return (
     <>
-      <strong>PhoneBook</strong>
-      <hr/>
-      <div>Todos os contatos</div>
-      <div>Adicionar contato</div>
+      <div className="menu-item" onClick={() => { window.location.reload(false) }}>
+        <Group />
+        <strong>Todos os contatos</strong>
+      </div>
+      
+      <div className="menu-item">
+        <PersonAdd />
+        <strong>Adicionar contato</strong>
+      </div>
     </>
   );
 }

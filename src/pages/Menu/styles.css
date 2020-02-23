@@ -1,0 +1,8 @@
+.menu-item {
+    display: inline-flex;
+    align-items: center;
+}
+
+.menu-item strong {
+    margin-left: 10px;
+}   
