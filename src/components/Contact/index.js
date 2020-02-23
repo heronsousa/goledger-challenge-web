@@ -13,14 +13,13 @@ import {
 import ContactForm from '../ContactForm/index';
 
 import './styles.css';
-
 import user_icon from '../../assets/user-icon.svg';
 
 export default function Contact({ contact }) {
 
     const [visibleInfo, setVisibleInfo] = useState(false);
-    const [open, setOpen] = React.useState(false);
-    const title = 'Atualizar contato';
+    const [open, setOpen] = useState(false);
+    const title = 'Atualizar';
 
     const iconStyles = {
         fontSize: 13,

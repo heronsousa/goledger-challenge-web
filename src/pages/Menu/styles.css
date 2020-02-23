@@ -3,6 +3,11 @@
     align-items: center;
 }
 
+.menu-item :hover {
+    color: rgb(1, 195, 221);
+    cursor: pointer;
+}
+
 .menu-item strong {
     margin-left: 10px;
 }   

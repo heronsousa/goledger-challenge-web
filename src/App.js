@@ -1,5 +1,5 @@
 import React from 'react';
-import { Group, RecentActors } from '@material-ui/icons';
+import { PeopleAltOutlined, RecentActorsOutlined } from '@material-ui/icons';
 
 import ContactList from './pages/ContactList/index';
 import Menu from './pages/Menu/index';
@@ -12,7 +12,7 @@ function App() {
         <div className="app">
             <aside>
                 <div className="header">
-                    <RecentActors />
+                    <RecentActorsOutlined />
                     <strong>PhoneBook</strong>
                 </div>
                 <div className="content">
@@ -21,7 +21,7 @@ function App() {
             </aside>
             <main>
                 <div className="header">
-                    <Group />
+                    <PeopleAltOutlined />
                     <strong>Contatos</strong>
                 </div>
                 <div className="content">

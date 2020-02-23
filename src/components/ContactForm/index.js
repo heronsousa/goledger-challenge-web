@@ -27,6 +27,7 @@ const useStyles = makeStyles(theme => ({
 export default function ContactForm({ modal }) {
 
     const { open, setOpen, contact, title } = modal;
+
     const [name, setName] = useState(contact.name);
     const [email, setEmail] = useState(contact.email);
     const [phone, setPhone] = useState(contact.phone);
@@ -35,19 +36,26 @@ export default function ContactForm({ modal }) {
 
     const classes = useStyles();
 
+    const data = {
+        "@assetType": "contact",
+        "name": name,
+        "email": email,
+        "age": Number(age),
+        "company": company,
+        "phone": phone
+    }
+
     async function updateContact(e) {
         e.preventDefault();
 
-        const data = {
-            "@assetType": "contact",
-            "name": name,
-            "email": email,
-            "age": Number(age),
-            "company": company,
-            "phone": phone
-        }
-
         await api.put('/update', data);
+        window.location.reload(false);
+    }
+
+    async function createContact(e) {
+        e.preventDefault();
+
+        await api.post('/create', data);
         window.location.reload(false);
     }
 
@@ -67,9 +75,9 @@ export default function ContactForm({ modal }) {
         >
             <Fade in={open}>
                 <div className={classes.paper}>
-                    <strong className="form-title">{title}</strong>
+                    <strong className="form-title">{title} contato</strong>
                 
-                    <form className={classes.form} onSubmit={updateContact}>
+                    <form className={classes.form} onSubmit={ title=='Adicionar' ? createContact : updateContact}>
 
                         <div className="input-block">
                             <label htmlFor="name">Nome</label>
