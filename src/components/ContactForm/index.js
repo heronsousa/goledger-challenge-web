@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Modal, Fade, Backdrop, CircularProgress, Dialog, DialogTitle } from '@material-ui/core';
+import { Modal, Fade, Backdrop, CircularProgress } from '@material-ui/core';
+import AlertMessage from '../AlertMessage/index';
 import api from '../../services/api';
 
 import './styles.css';
@@ -23,38 +24,6 @@ const useStyles = makeStyles(theme => ({
     },
     placeholder: {
         height: 40,
-    },
-    dialogModal: {
-        display: 'flex',
-        alignItems: 'flex-start',
-        justifyContent: 'flex-end',
-        margin: 20
-    },
-    dialog: {
-        display: 'flex',
-        flexDirection: 'column',
-        
-        border: '1px solid black',
-        backgroundColor: 'rgb(0, 119, 255)',
-        padding: 15,
-        fontWeight: 'bold',
-        color: 'white',
-        fontSize: 18
-    },
-    button: {
-        alignSelf: 'flex-end',
-        width: 50,
-        border: 0,
-        marginTop: 10,
-        backgroundColor: 'white',
-        borderRadius: 2,
-        padding: 5,
-        fontSize: 16,
-        fontWeight: 'bold',
-        color: 'rgb(0, 119, 255)',
-    },
-    backDrop: {
-        background: 'none'
     }
 }));
 
@@ -68,7 +37,7 @@ export default function ContactForm({ modal }) {
     const [company, setCompany] = useState(contact.company);
     const [age, setAge] = useState(contact.age);
     const [query, setQuery] = useState('idle');
-    const [alertRes, setAlertRes] = useState(false);
+    const [openAlert, setOpenAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
 
     const classes = useStyles();
@@ -86,31 +55,44 @@ export default function ContactForm({ modal }) {
         e.preventDefault();
 
         setQuery('progress');
-        
         try {
             await api.put('/update', data);
-
+            
             setAlertMessage('Contato atualizado com sucesso!');
-
-        } catch(err) {
-            if(err.response.status === 404){                    
+            
+        } catch (err) {
+            if (err.response.status === 404) {
                 setAlertMessage('Contato não existe.');
                 setQuery('idle');
             }
         }
-
-        setAlertRes(true);
-        setInterval(handleClose, 10000);
+        
+        setOpenAlert(true);
+        setInterval(handleClose, 5000);
     }
 
     async function createContact(e) {
         e.preventDefault();
 
-        await api.post('/create', data);
+        setQuery('progress');
+        try {
+            await api.post('/create', data);
+
+            setAlertMessage('Contato adicionado com sucesso!');
+            
+        } catch (err) {
+            if (err.response.status === 409) {
+                setAlertMessage('Contato já existe.');
+                setQuery('idle');
+            }
+        }
+        
+        setOpenAlert(true);
+        setInterval(handleClose, 5000);
     }
-    
+
     function handleClose() {
-        setAlertRes(false);
+        setOpenAlert(false);
         window.location.reload(false);
     }
 
@@ -188,7 +170,7 @@ export default function ContactForm({ modal }) {
                             </div>
 
                             <button type="submit">
-                                {query==='progress' ? 
+                                {query === 'progress' ?
                                     <CircularProgress size={20} color='inherit' /> :
                                     'Salvar'
                                 }
@@ -198,28 +180,7 @@ export default function ContactForm({ modal }) {
                 </Fade>
             </Modal>
 
-            <Modal
-                aria-labelledby="transition-modal-title"
-                aria-describedby="transition-modal-description"
-                className={classes.dialogModal}
-                open={alertRes}
-                onClose={handleClose}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                    classes: {
-                        root: classes.backDrop
-                    }
-                }}
-            >
-                <>
-                    <div className={classes.dialog}>
-                        <strong>{alertMessage}</strong>
-                        <button onClick={handleClose} className={classes.button}>OK</button>
-                    </div>
-                </>
-            </Modal>
-
+            <AlertMessage alert={{openAlert, setOpenAlert, alertMessage}} />
         </>
     );
 }
