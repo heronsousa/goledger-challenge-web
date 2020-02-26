@@ -121,9 +121,9 @@ export default function Contact({ contact }) {
                         </>
                         :
                         <ExpandMore
-                        fontSize={'small'}
-                        style={{ color: '#333' }}
-                        onClick={() => { setVisibleInfo(!visibleInfo) }}
+                            fontSize={'small'}
+                            style={{ color: '#333' }}
+                            onClick={() => { setVisibleInfo(!visibleInfo) }}
                         />
                     }
                 </div>
