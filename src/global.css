@@ -12,8 +12,9 @@ html, body, #root {
 }
 
 body {
-    background-image: linear-gradient(rgb(0, 115, 247), rgb(0, 225, 255));
-    background-attachment: fixed;
+    background-color: #fafafa;
+    /* background-image: linear-gradient(rgb(0, 115, 247), rgb(0, 225, 255));
+    background-attachment: fixed; */
 }
 
 body, input, button {

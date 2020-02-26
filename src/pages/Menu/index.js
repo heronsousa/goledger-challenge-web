@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { PersonAddOutlined, PeopleAltOutlined } from '@material-ui/icons';
+
 import ContactForm from '../../components/ContactForm/index';
 
 import './styles.css';

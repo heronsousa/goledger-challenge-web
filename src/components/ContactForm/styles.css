@@ -38,3 +38,19 @@ form button {
     cursor: pointer;
     transition: background 0.5s;
 }
+
+.paper {
+    padding: 20px;
+    background-color: #fafafa;
+    border: 1px solid rgb(0, 119, 255);
+    border-radius: 4px
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    background-color: #fafafa;
+}

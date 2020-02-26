@@ -1,31 +1,10 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { Modal, Fade, Backdrop, CircularProgress } from '@material-ui/core';
+
 import AlertMessage from '../AlertMessage/index';
 import api from '../../services/api';
 
 import './styles.css';
-
-const useStyles = makeStyles(theme => ({
-    modal: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    paper: {
-        padding: 20,
-        backgroundColor: theme.palette.background.paper,
-        border: '1px solid rgb(0, 119, 255)',
-        borderRadius: 4
-    },
-    form: {
-        display: 'flex',
-        flexDirection: 'column',
-    },
-    placeholder: {
-        height: 40,
-    }
-}));
 
 export default function ContactForm({ modal }) {
 
@@ -39,8 +18,7 @@ export default function ContactForm({ modal }) {
     const [query, setQuery] = useState('idle');
     const [openAlert, setOpenAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
-
-    const classes = useStyles();
+    const [success, setSuccess] = useState(false);
 
     const data = {
         "@assetType": "contact",
@@ -55,42 +33,53 @@ export default function ContactForm({ modal }) {
         e.preventDefault();
 
         setQuery('progress');
+        
         try {
             await api.put('/update', data);
             
-            setAlertMessage('Contato atualizado com sucesso!');
+            setAlertMessage('Contato atualizado!');
+            setSuccess(true);
+            setOpenAlert(true);
+            setInterval(handleClose, 3000);
             
         } catch (err) {
+            console.log(err);
             if (err.response.status === 404) {
                 setAlertMessage('Contato não existe.');
-                setQuery('idle');
+            } else {
+                setAlertMessage('Erro ao editar contato.');
             }
+            setOpenAlert(true);
+            setQuery('idle');
+            setInterval(() => {setOpenAlert(false)}, 3000);
         }
-        
-        setOpenAlert(true);
-        setInterval(handleClose, 5000);
     }
 
     async function createContact(e) {
         e.preventDefault();
 
         setQuery('progress');
+
         try {
             await api.post('/create', data);
 
-            setAlertMessage('Contato adicionado com sucesso!');
-            
+            setAlertMessage('Contato adicionado!');
+            setSuccess(true);
+            setOpenAlert(true);
+            setInterval(handleClose, 3000);
+
         } catch (err) {
             if (err.response.status === 409) {
                 setAlertMessage('Contato já existe.');
-                setQuery('idle');
+            } else {
+                setAlertMessage('Erro ao criar contato.');
             }
+            setOpenAlert(true);
+            setQuery('idle');
+            setInterval(() => {setOpenAlert(false)}, 3000);
         }
-        
-        setOpenAlert(true);
-        setInterval(handleClose, 5000);
     }
-
+    
     function handleClose() {
         setOpenAlert(false);
         window.location.reload(false);
@@ -102,7 +91,7 @@ export default function ContactForm({ modal }) {
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
-                className={classes.modal}
+                className="modal"
                 open={open}
                 onClose={() => { setOpen(false) }}
                 closeAfterTransition
@@ -112,10 +101,10 @@ export default function ContactForm({ modal }) {
                 }}
             >
                 <Fade in={open}>
-                    <div className={classes.paper}>
+                    <div className="paper">
                         <strong className="form-title">{title} contato</strong>
 
-                        <form className={classes.form} onSubmit={title === 'Adicionar' ? createContact : updateContact}>
+                        <form className={"form"} onSubmit={title === 'Adicionar' ? createContact : updateContact}>
 
                             <div className="input-block">
                                 <label htmlFor="name">Nome</label>
@@ -180,7 +169,7 @@ export default function ContactForm({ modal }) {
                 </Fade>
             </Modal>
 
-            <AlertMessage alert={{openAlert, setOpenAlert, alertMessage}} />
+            <AlertMessage alert={{openAlert, setOpenAlert, alertMessage, success}} />
         </>
     );
 }

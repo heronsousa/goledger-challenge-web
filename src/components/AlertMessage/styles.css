@@ -1,0 +1,38 @@
+.dialogModal {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    margin: 20px
+}
+
+.success {
+    display: inline-flex;
+    align-items: center;
+
+    border-radius: 4px;
+    background-color: green;
+    padding: 10px;
+    font-weight: bold;
+    color: #fff;
+    font-size: 16px
+}
+
+.error {
+    display: inline-flex;
+    align-items: center;
+
+    border-radius: 4px;
+    background-color: red;
+    padding: 10px;
+    font-weight: bold;
+    color: #fff;
+    font-size: 16px
+}
+
+.success strong {
+    margin-left: 8px;
+}
+
+.error strong {
+    margin-left: 8px;
+}

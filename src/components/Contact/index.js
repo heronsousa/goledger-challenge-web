@@ -10,54 +10,16 @@ import {
     ExpandMore,
     ExpandLess
 } from '@material-ui/icons';
-import { Modal, Fade, Backdrop, CircularProgress } from '@material-ui/core';
+import { Modal, Backdrop } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
 import ContactForm from '../ContactForm/index';
 import AlertMessage from '../AlertMessage/index';
-import { makeStyles } from '@material-ui/core/styles';
+
 import './styles.css';
 import user_icon from '../../assets/user-icon.png';
 
 const useStyles = makeStyles(theme => ({
-    modal: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-
-    },
-    dialog: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-
-        height: 120,
-        width: 280,
-        
-        borderRadius: 4,
-        border: '2px solid #333',
-        backgroundColor: '#fafafa',
-        padding: 15,
-        fontWeight: 'bold',
-        color: '#333',
-        fontSize: 17
-    },
-    buttons: {
-        display: 'flex',
-        flexDirection: 'row',
-        alignSelf: 'flex-end',
-    },
-    button: {
-        alignSelf: 'flex-end',
-        border: 0,
-        marginLeft: 7,
-        backgroundColor: 'rgb(0, 119, 255)',
-        borderRadius: 2,
-        padding: 5,
-        fontSize: 14,
-        fontWeight: 'bold',
-        color: 'white',
-        cursor: 'pointer'
-    },
     backDrop: {
         background: 'none'
     },
@@ -70,8 +32,10 @@ export default function Contact({ contact }) {
     const [open, setOpen] = useState(false);
     const [opena, setOpena] = useState(false);
     const [openAlert, setOpenAlert] = useState(false);
+    const [success, setSuccess] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
     const title = 'Atualizar';
+
     const classes = useStyles();
 
     const iconStyles = {
@@ -87,14 +51,15 @@ export default function Contact({ contact }) {
         }
         try {
             await api.delete('/delete', { data })
-            setAlertMessage('Contato excluído com sucesso!')
+            setAlertMessage('Contato excluído!')
+            setSuccess(true);
             
         } catch (error) {
             setAlertMessage('Erro ao excluir contato.')
         }
         
         setOpenAlert(true);
-        setInterval(handleClose, 5000);
+        setInterval(handleClose, 3000);
     }
 
     function handleClose() {
@@ -169,7 +134,7 @@ export default function Contact({ contact }) {
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
-                className={classes.modal}
+                className="modal"
                 open={opena}
                 onClose={() => { setOpena(false) }}
                 closeAfterTransition
@@ -180,18 +145,16 @@ export default function Contact({ contact }) {
                     }
                 }}
             >
-                <Fade in={opena}>
-                    <div className={classes.dialog}>
-                        <strong>Deseja excluir {contact.name}?</strong>
-                        <div className={classes.buttons}>
-                            <button onClick={deleteContact} className={classes.button}>Confirmar</button>
-                            <button onClick={() => { setOpena(false) }} className={classes.button}>Cancelar</button>
-                        </div>
+                <div className="dialog">
+                    <strong>Deseja excluir {contact.name}?</strong>
+                    <div className="buttons">
+                        <button onClick={deleteContact} className="button">Confirmar</button>
+                        <button onClick={() => { setOpena(false) }} className="button">Cancelar</button>
                     </div>
-                </Fade>
+                </div>
             </Modal>
 
-            <AlertMessage alert={{openAlert, setOpenAlert, alertMessage}} />
+            <AlertMessage alert={{openAlert, setOpenAlert, alertMessage, success}} />
         </>
     );
 }
