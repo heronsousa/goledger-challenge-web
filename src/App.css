@@ -46,7 +46,7 @@
   margin-left: 20px;
 }
 
-.app .content,.app .header{
+.app .content, .app .header{
   background: #fff;
   box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.123);
   border: 1px rgb(219, 216, 216) solid;
@@ -71,4 +71,21 @@
 
 .app .header strong {
   margin-left: 10px;
+}
+
+@media (max-width: 1000px){
+  .app .app-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .app main {
+    margin-left: 0;
+  }
+
+  .app aside {
+    width: 100%;
+    margin-bottom: 20px;
+  }
 }

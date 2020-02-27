@@ -7,3 +7,9 @@ ul header {
     align-self: center;
     margin-bottom: 10px;
 }
+
+@media (max-width: 500px){
+    ul {
+        min-width: 0;
+    }   
+}
