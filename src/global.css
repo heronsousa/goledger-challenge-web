@@ -5,6 +5,7 @@
     padding: 0;
     outline: 0;
     box-sizing: border-box;
+
 }
 
 html, body, #root {
@@ -12,9 +13,13 @@ html, body, #root {
 }
 
 body {
-    background-color: #fafafa;
-    /* background-image: linear-gradient(rgb(0, 115, 247), rgb(0, 225, 255));
-    background-attachment: fixed; */
+    margin: 0 auto;
+
+    background-color: #E5E6F0;
+    padding: 10px 0 20px;
+  
+    display: flex;
+    justify-content: center;
 }
 
 body, input, button {

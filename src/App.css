@@ -1,10 +1,38 @@
 .app {
-  margin: 0 auto;
-  padding: 30px 0 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   
+  background-color: #fafafa;
+  border: 1px solid rgba(51, 51, 51, 0.24);
+  border-radius: 8px;
+  margin-bottom: 10px;;
+}
+
+.app .app-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  width: 100%;
+  padding: 5px 0;
+
+  background-color: rgb(15, 149, 202);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.app .app-header img {
+  width: 150px;
+  height: 30px;
+}
+
+.app .app-body {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  
+  padding: 20px 40px 10px;
 }
 
 .app aside {

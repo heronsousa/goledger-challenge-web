@@ -21,9 +21,16 @@ export default function ContactList() {
 
     return (
         <ul className="contact-container">
-            {contacts.map(contact => (
-                <Contact key={contact['@key']} contact={contact} />
-            ))}
+            { contacts.length > 0 ?
+                contacts.map(contact => (
+                    <Contact key={contact['@key']} contact={contact} />
+                ))
+             :
+                <div className="message">
+                    <strong>Você não tem nenhum contato.</strong>
+                </div>
+            }
+
         </ul>
     );
 }
