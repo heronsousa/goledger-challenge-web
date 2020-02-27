@@ -1,28 +1,29 @@
 # GoLedger Challenge
 
-In this challenge you will create a web interface to a blockchain application. 
-In this application you must implement a simple phonebook.
+<div align="center">
 
-# Requirements
+![PhoneBookGif](src/assets/goledger.gif)
 
-- Your application should be able to add/remove/edit and show all current contacts.
+</div>
 
-- Use React for development (all UI libraries are allowed)
+## Project
 
-## Instructions
+Implementation of a web interface to a phonebook blockchain application. 
 
-- Fork the repository https://github.com/goledgerdev/goledger-challenge-web
+## Getting started
 
-  - Fork it, do **NOT** clone it, since you will need to send us your forked repository
+Installing: 
 
-- Create an web application using React. You will implement the basic operations provided by the API, which are `Create`, `Update`, `Delete` and `Search`.
+> git clone https://github.com/heronsousa/goledger-challenge-web.git
 
-- Improve your application with a beautiful UI.
+Go to directory:
 
-## Server
+> cd goledger-challenge-web
 
-The data are obtained using a rest server at this address: `http://ec2-100-27-2-255.compute-1.amazonaws.com/api/`
+Install dependencies:
 
-Also, a Swagger with the endpoints specifications for the operations is provided at this address: `http://ec2-100-27-2-255.compute-1.amazonaws.com/api-docs/`
+> yarn
 
-To complete the challenge, you must send us the link to your forked repository with the code of your application. Please, provide instructions to execute the code.
+Start:
+
+> yarn start
